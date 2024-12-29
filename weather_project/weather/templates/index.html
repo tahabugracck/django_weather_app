@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu Uygulaması</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Açık mavi */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            color: #0288d1; /* Mavi başlık */
+            margin-top: 50px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-right: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0288d1; /* Mavi buton */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277bd; /* Hover için daha koyu mavi */
+        }
+        .weather-info {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 80%;
+            max-width: 500px;
+        }
+        .weather-info h2 {
+            color: #0288d1; /* Başlıklar için mavi */
+        }
+        .weather-info p {
+            font-size: 18px;
+            color: #555;
+        }
+        .weather-info ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .weather-info li {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #0277bd; /* Etiketlerde mavi tonları */
+        }
+        .bold {
+            font-weight: bold;
+            color: #333;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hava Durumu Uygulaması</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="Şehir Girin" required>
+        <button type="submit">Hava Durumunu Getir</button>
+    </form>
+
+    {% if city %}
+    <div class="weather-info">
+        <h2>{{ city }} için hava durumu:</h2>
+        <p><strong>Hava Durumu:</strong> {{ hava_durumu }}</p>
+        <p><strong>Sıcaklık:</strong> {{ sıcaklık }}°C</p>
+        <p><strong>Hissedilen Sıcaklık:</strong> {{ hissedilen }}°C</p>
+        
+        <ul>
+            {% for etiket in etiketler %}
+            <li><span class="bold">{{ etiket }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>
