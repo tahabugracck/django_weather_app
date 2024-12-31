@@ -1,7 +1,0 @@
-1. django projesi oluşturma (django-admin startproject)
-2. uygulama oluşturma (python manage.py startapp weather)
-3. uygulama yapılandırma (setting.py)
-4. url yapılandırması (urls.py)
-5. view fonksiyonu
-6. html 
-7.test
